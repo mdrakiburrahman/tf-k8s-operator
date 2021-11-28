@@ -9,3 +9,4 @@ backup/
 .terraform.lock.hcl
 tfops/credentials
 env-variables.yaml
+sqlmiops/credentials

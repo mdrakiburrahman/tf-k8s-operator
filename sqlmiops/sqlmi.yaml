@@ -42,11 +42,13 @@ spec:
       sensitive: false
       environmentVariable: false
     - key: sqlmi_administrator_login
-      sensitive: true
-      environmentVariable: true
+      value: boor
+      sensitive: false
+      environmentVariable: false
     - key: sqlmi_administrator_password
-      sensitive: true
-      environmentVariable: true
+      value: myCompl3xPassword!123
+      sensitive: false
+      environmentVariable: false
   # ARM template variables
     - key: ARM_CLIENT_ID
       valueFrom:
