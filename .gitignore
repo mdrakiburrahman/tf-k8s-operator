@@ -1,0 +1,11 @@
+.DS_Store
+.vscode
+backup/
+*tfstate*
+.terraform
+*.log
+.vagrant
+*.pem
+.terraform.lock.hcl
+tfops/credentials
+env-variables.yaml

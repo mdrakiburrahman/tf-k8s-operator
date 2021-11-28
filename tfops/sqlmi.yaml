@@ -1,0 +1,78 @@
+---
+apiVersion: app.terraform.io/v1alpha1
+kind: Workspace
+metadata:
+  name: sqlmi
+spec:
+  organization: raki-k8s-workspace
+  secretsMountPath: "/tmp/secrets"
+  module:
+    source: "git::https://github.com/mdrakiburrahman/sqlmi-tf-module.git"
+  outputs:
+    - key: sqlmi_fqdn
+      moduleOutputName: sqlmi_fqdn
+  variables:
+  # Terraform module variables
+    - key: mi_name
+      value: aiasqlmisvr02
+      sensitive: false
+      environmentVariable: false
+    - key: resource_group_name
+      value: tfk8s-sqlmi-rg
+      sensitive: false
+      environmentVariable: false
+    - key: resource_group_location
+      value: East US
+      sensitive: false
+      environmentVariable: false
+    - key: vnet_name
+      value: vnet
+      sensitive: false
+      environmentVariable: false
+    - key: vnet_address_prefix
+      value: 10.0.0.0/16
+      sensitive: false
+      environmentVariable: false
+    - key: mi_subnet_name
+      value: ManagedInstance
+      sensitive: false
+      environmentVariable: false
+    - key: mi_subnet_address_prefix
+      value: 10.0.0.0/24
+      sensitive: false
+      environmentVariable: false
+    - key: sqlmi_administrator_login
+      sensitive: true
+      environmentVariable: true
+    - key: sqlmi_administrator_password
+      sensitive: true
+      environmentVariable: true
+  # ARM template variables
+    - key: ARM_CLIENT_ID
+      valueFrom:
+        configMapKeyRef:
+          name: azure-configuration
+          key: arm_client_id
+      sensitive: false
+      environmentVariable: true
+    - key: ARM_SUBSCRIPTION_ID
+      valueFrom:
+        configMapKeyRef:
+          name: azure-configuration
+          key: arm_subscription_id
+      sensitive: false
+      environmentVariable: true
+    - key: ARM_TENANT_ID
+      valueFrom:
+        configMapKeyRef:
+          name: azure-configuration
+          key: arm_tenant_id
+      sensitive: false
+      environmentVariable: true
+    - key: ARM_CLIENT_SECRET
+      sensitive: true
+      environmentVariable: true
+    - key: CONFIRM_DESTROY
+      value: "1"
+      sensitive: false
+      environmentVariable: true
